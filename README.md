@@ -2,9 +2,8 @@ PROJETO: Sistema de Gerenciamento de Eventos (Frontend)
 ======================================================
 
 Disciplina: Programação Web I
-Curso: [Seu Curso Aqui]
-Aluno: [Seu Nome Aqui]
-Semestre: [Semestre/Ano]
+Curso: Sistemas de Informação
+Aluno: Frank Duque e Lorraine Duque
 
 Descrição
 ---------
