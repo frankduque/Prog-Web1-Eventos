@@ -1,0 +1,22 @@
+<h1 class="text-3xl font-semibold mb-6">🎫 Lista de Eventos</h1>
+
+<div class="mb-6 text-right">
+  <button mat-raised-button color="primary" routerLink="/create" class="bg-blue-500 text-white px-6 py-2 rounded shadow hover:bg-blue-600 transition">
+    Criar Novo Evento
+  </button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div
+    *ngFor="let evento of eventos"
+    class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 hover:shadow-xl transition"
+  >
+    <h2 class="text-xl font-bold mb-1">{{ evento.nome }}</h2>
+    <p class="text-gray-500 mb-2">{{ evento.descricao }}</p>
+    <div class="text-sm space-y-1 text-gray-600">
+      <p><strong>📍 Local:</strong> {{ evento.local }}</p>
+      <p><strong>🗓️ Período:</strong> {{ evento.dataInicio }} → {{ evento.dataFim }}</p>
+      <p><strong>🔞 Para adultos?</strong> {{ evento.publicoAlvoAdulto ? 'Sim' : 'Não' }}</p>
+    </div>
+  </div>
+</div>
