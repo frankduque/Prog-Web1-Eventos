@@ -1,22 +1,46 @@
-<h1 class="text-3xl font-semibold mb-6">🎫 Lista de Eventos</h1>
+<div class="event-list-wrapper">
+  <div class="header-section">
+    <h2>Lista de Eventos</h2>
+    <button mat-raised-button color="primary" routerLink="/create">
+      <mat-icon>add</mat-icon> Criar Novo Evento
+    </button>
+  </div>
 
-<div class="mb-6 text-right">
-  <button mat-raised-button color="primary" routerLink="/create" class="bg-blue-500 text-white px-6 py-2 rounded shadow hover:bg-blue-600 transition">
-    Criar Novo Evento
-  </button>
-</div>
+  <div *ngIf="isLoading" class="loading-message">
+    <mat-spinner></mat-spinner> Carregando eventos...
+  </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div
-    *ngFor="let evento of eventos"
-    class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 hover:shadow-xl transition"
-  >
-    <h2 class="text-xl font-bold mb-1">{{ evento.nome }}</h2>
-    <p class="text-gray-500 mb-2">{{ evento.descricao }}</p>
-    <div class="text-sm space-y-1 text-gray-600">
-      <p><strong>📍 Local:</strong> {{ evento.local }}</p>
-      <p><strong>🗓️ Período:</strong> {{ evento.dataInicio }} → {{ evento.dataFim }}</p>
-      <p><strong>🔞 Para adultos?</strong> {{ evento.publicoAlvoAdulto ? 'Sim' : 'Não' }}</p>
-    </div>
+  <div *ngIf="error" class="error-message">
+    <mat-icon color="warn">error_outline</mat-icon> {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error && eventos.length === 0" class="no-events-message">
+    <p>Nenhum evento encontrado.</p>
+    <p>Clique em "Criar Novo Evento" para adicionar um.</p>
+  </div>
+
+  <div *ngIf="!isLoading && !error && eventos.length > 0" class="event-cards-container">
+    <mat-card *ngFor="let evento of eventos" class="event-card">
+      <mat-card-header>
+        <mat-card-title>{{ evento.nome }}</mat-card-title>
+        <mat-card-subtitle>{{ evento.local }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ evento.descricao }}</p>
+        <div class="event-dates">
+          <span>Início: {{ evento.dataInicio }}</span>
+          <span>Fim: {{ evento.dataFim }}</span>
+        </div>
+        <p class="publico-alvo">Público Adulto: <strong>{{ evento.publicoAlvoAdulto ? 'Sim' : 'Não' }}</strong></p>
+      </mat-card-content>
+      <mat-card-actions class="card-actions">
+        <button mat-raised-button color="primary" [routerLink]="['/events', evento.id, 'edit']">
+          <mat-icon>edit</mat-icon> Editar
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteEvent(evento.id)">
+          <mat-icon>delete</mat-icon> Excluir
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>

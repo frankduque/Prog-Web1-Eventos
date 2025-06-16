@@ -1,0 +1,100 @@
+<div class="create-event-wrapper p-4 max-w-3xl mx-auto my-8 bg-gray-50 rounded-xl shadow-lg">
+  <div class="header-section flex justify-between items-center mb-8 border-b pb-4">
+    <h1 class="text-3xl font-semibold text-gray-800">
+      <span *ngIf="isEditMode">✏️ Editar Evento</span>
+      <span *ngIf="!isEditMode">➕ Criar Novo Evento</span>
+    </h1>
+    <!-- AJUSTADO routerLink PARA SER EXPLÍCITO -->
+    <button mat-flat-button color="basic" (click)="goBack()"
+            class="flex items-center space-x-2 px-4 py-2 rounded-md hover:bg-gray-100 transition duration-200">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar para a Lista
+    </button>
+  </div>
+
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form-grid grid grid-cols-1 gap-6">
+    <mat-card class="form-card p-6 rounded-lg shadow-md border border-gray-200">
+      <mat-card-content class="space-y-6">
+
+        <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-label>Nome do Evento</mat-label>
+          <input matInput formControlName="nome" placeholder="Ex: Festival de Verão">
+          <ng-container *ngIf="eventForm.get('nome') as nomeControl">
+            <mat-error *ngIf="nomeControl.hasError('required') && nomeControl.touched">
+              O nome é obrigatório.
+            </mat-error>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-label>Descrição</mat-label>
+          <textarea matInput formControlName="descricao"
+                    placeholder="Ex: Um evento com muitas atrações musicais e gastronômicas." rows="3"></textarea>
+          <ng-container *ngIf="eventForm.get('descricao') as descricaoControl">
+            <mat-error *ngIf="descricaoControl.hasError('required') && descricaoControl.touched">
+              A descrição é obrigatória.
+            </mat-error>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-label>Local</mat-label>
+          <input matInput formControlName="local" placeholder="Ex: Parque Ibirapuera">
+          <ng-container *ngIf="eventForm.get('local') as localControl">
+            <mat-error *ngIf="localControl.hasError('required') && localControl.touched">
+              O local é obrigatório.
+            </mat-error>
+          </ng-container>
+        </mat-form-field>
+
+        <div class="dates-row grid sm:grid-cols-2 gap-6">
+          <mat-form-field appearance="outline" class="date-field w-full">
+            <mat-label>Data de Início</mat-label>
+            <input matInput [matDatepicker]="pickerInicio" formControlName="dataInicio">
+            <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInicio></mat-datepicker>
+            <ng-container *ngIf="eventForm.get('dataInicio') as dataInicioControl">
+              <mat-error *ngIf="dataInicioControl.hasError('required') && dataInicioControl.touched">
+                A data de início é obrigatória.
+              </mat-error>
+            </ng-container>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="date-field w-full">
+            <mat-label>Data de Fim</mat-label>
+            <input matInput [matDatepicker]="pickerFim" formControlName="dataFim">
+            <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFim></mat-datepicker>
+            <ng-container *ngIf="eventForm.get('dataFim') as dataFimControl">
+              <mat-error *ngIf="dataFimControl.hasError('required') && dataFimControl.touched">
+                A data de fim é obrigatória.
+              </mat-error>
+            </ng-container>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width w-full">
+          <mat-label>Evento para Adultos?</mat-label>
+          <mat-select formControlName="publicoAlvoAdulto">
+            <mat-option [value]="true">Sim</mat-option>
+            <mat-option [value]="false">Não</mat-option>
+          </mat-select>
+          <ng-container *ngIf="eventForm.get('publicoAlvoAdulto') as publicoAlvoAdultoControl">
+            <mat-error *ngIf="publicoAlvoAdultoControl.hasError('required') && publicoAlvoAdultoControl.touched">
+              A indicação de público é obrigatória.
+            </mat-error>
+          </ng-container>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions class="form-actions flex justify-end p-4 border-t border-gray-200 mt-6 space-x-2">
+        <button mat-raised-button color="primary" type="submit" [disabled]="eventForm.invalid"
+                class="flex items-center space-x-2 px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-200">
+          <mat-icon>save</mat-icon>
+          <span *ngIf="isEditMode">Salvar Alterações</span>
+          <span *ngIf="!isEditMode">Salvar Evento</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

@@ -1,0 +1,156 @@
+/* src/app/event-list/event-list.component.css */
+
+.event-list-wrapper {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto; /* Centraliza o container */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.header-section h2 {
+  margin: 0;
+  color: #333;
+  font-size: 2em;
+}
+
+.header-section button {
+  padding: 10px 20px;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espaço entre ícone e texto */
+}
+
+/* Mensagens de estado */
+.loading-message,
+.error-message,
+.no-events-message {
+  text-align: center;
+  padding: 30px;
+  margin-top: 30px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  color: #555;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.error-message {
+  color: #d32f2f; /* Cor de erro do Material Design */
+  background-color: #ffebee; /* Fundo mais claro para erro */
+  border: 1px solid #d32f2f;
+}
+
+.loading-message mat-spinner {
+  margin-bottom: 15px;
+}
+
+.event-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Colunas responsivas */
+  gap: 25px; /* Espaçamento entre os cards */
+}
+
+.event-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 8px;
+  overflow: hidden; /* Garante que bordas arredondadas funcionem com imagens etc. */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Empurra as ações para baixo */
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mat-card-header {
+  padding-bottom: 0; /* Ajusta espaçamento interno do cabeçalho do card */
+}
+
+.mat-card-title {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #3f51b5; /* Cor primária do Material */
+}
+
+.mat-card-subtitle {
+  color: #757575;
+}
+
+.mat-card-content {
+  padding-top: 10px;
+  flex-grow: 1; /* Permite que o conteúdo ocupe o espaço disponível */
+}
+
+.mat-card-content p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.event-dates {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px dashed #eee;
+  font-size: 0.95em;
+  color: #666;
+}
+
+.publico-alvo {
+  margin-top: 10px;
+  font-size: 0.95em;
+  color: #666;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end; /* Alinha os botões à direita */
+  gap: 8px; /* Espaço entre os botões de ação */
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.mat-card-actions button mat-icon {
+  margin-right: 5px; /* Espaço entre ícone e texto do botão */
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  .event-list-wrapper {
+    padding: 15px;
+    margin: 10px auto;
+  }
+
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .header-section h2 {
+    font-size: 1.8em;
+  }
+
+  .event-cards-container {
+    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+  }
+}
